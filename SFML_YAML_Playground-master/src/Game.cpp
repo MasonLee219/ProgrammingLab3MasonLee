@@ -7,6 +7,7 @@ static double const MS_PER_UPDATE = 10.0;
 ////////////////////////////////////////////////////////////
 Game::Game()
 	: m_window(sf::VideoMode(ScreenSize::s_height, ScreenSize::s_width, 32), "SFML Playground", sf::Style::Default)
+	, m_tank(m_texture)
 {
 	m_window.setVerticalSyncEnabled(true);
 
@@ -28,6 +29,12 @@ Game::Game()
 	if (!PlayerTexture.loadFromFile("./resources/images/E-100.png"));
 	Player.setTexture(PlayerTexture);
 
+	if (!m_texture.loadFromFile("./resources/images/SpriteSheet.png"))
+	{
+		std::string s("Error loading texture");
+		throw std::exception(s.c_str());
+	}
+
 	if (!BackgroundTexture.loadFromFile(m_level.m_background.m_fileName));
 	Background.setTexture(BackgroundTexture);
 
@@ -36,6 +43,8 @@ Game::Game()
 		std::string errorMsg("Error loading texture");
 		throw std::exception(errorMsg.c_str());
 	}
+	
+
 
 	// Extract the wall image from the spritesheet.
 	sf::Sprite sprite;

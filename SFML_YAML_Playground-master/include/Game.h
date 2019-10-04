@@ -3,7 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "ScreenSize.h"
 #include "LevelLoader.h"
-
+#include "MathUtility.h"
+#include "Tank.h"
 
 /// <summary>
 /// @author RP
@@ -73,6 +74,7 @@ protected:
 
 private:
 	// To store the game level data.
+	Tank m_Tank;
 	LevelData m_level;
 	sf::Sprite Player;
 	sf::Texture PlayerTexture;
