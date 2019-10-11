@@ -1,13 +1,14 @@
 #include "Game.h"
 #include <iostream>
 
+
 // Updates per milliseconds
 static double const MS_PER_UPDATE = 10.0;
 
 ////////////////////////////////////////////////////////////
 Game::Game()
 	: m_window(sf::VideoMode(ScreenSize::s_height, ScreenSize::s_width, 32), "SFML Playground", sf::Style::Default)
-	, m_tank(m_texture)
+	, m_Tank(m_spriteSheetTexture, sf::Vector2f(0,0))
 {
 	m_window.setVerticalSyncEnabled(true);
 
@@ -25,18 +26,18 @@ Game::Game()
 		throw e;
 	}
 
-	Player.setPosition(m_level.m_tank.m_position);
-	if (!PlayerTexture.loadFromFile("./resources/images/E-100.png"));
-	Player.setTexture(PlayerTexture);
+	m_Tank.setPosition(m_level.m_tank.m_position);
+	//if (!m_playerTexture.loadFromFile("./resources/images/E-100.png"));
+	//m_player.setTexture(m_playerTexture);
 
-	if (!m_texture.loadFromFile("./resources/images/SpriteSheet.png"))
+	if (!m_spriteSheetTexture.loadFromFile("./resources/images/SpriteSheet.png"))
 	{
 		std::string s("Error loading texture");
 		throw std::exception(s.c_str());
 	}
 
-	if (!BackgroundTexture.loadFromFile(m_level.m_background.m_fileName));
-	Background.setTexture(BackgroundTexture);
+	if (!m_backgroundTexture.loadFromFile(m_level.m_background.m_fileName));
+	m_background.setTexture(m_backgroundTexture);
 
 	if (!m_spriteSheetTexture.loadFromFile("./resources/images/SpriteSheet.png"))
 	{
@@ -118,26 +119,44 @@ void Game::processGameEvents(sf::Event& event)
 			break;
 		}
 	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		m_Tank.increaseSpeed();
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+		m_Tank.decreaseSpeed();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		m_Tank.increaseRotation();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		m_Tank.decreaseRotation();
+	}
+
 }
 
 ////////////////////////////////////////////////////////////
 void Game::update(double dt)
 {
-
+	m_Tank.update(dt);
 }
 
 ////////////////////////////////////////////////////////////
 void Game::render()
 {
 	m_window.clear(sf::Color(0, 0, 0, 0));
-	m_window.draw(Background);
-	m_window.draw(Player);
+	m_window.draw(m_background);	
 	//int i = 0;
 
-	for (int i = 0; i < m_sprites.size(); i++)
+	/*for (int i = 0; i < m_sprites.size(); i++)
 	{
 		m_window.draw(m_sprites.at(i));
-	}
+	}*/
 
 	for (sf::Sprite & sprite : m_sprites)
 	{
@@ -145,6 +164,7 @@ void Game::render()
 		m_window.draw(sprite);
 		//i++;
 	}
+	m_Tank.render(m_window);
 	m_window.display();
 }
 

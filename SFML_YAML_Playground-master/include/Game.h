@@ -76,11 +76,11 @@ private:
 	// To store the game level data.
 	Tank m_Tank;
 	LevelData m_level;
-	sf::Sprite Player;
-	sf::Texture PlayerTexture;
+	
+	sf::Texture m_playerTexture;
 
-	sf::Sprite Background;
-	sf::Texture BackgroundTexture;
+	sf::Sprite m_background;
+	sf::Texture m_backgroundTexture;
 
 	std::vector<sf::Sprite>  m_sprites;
 	// A texture for the sprite sheet
