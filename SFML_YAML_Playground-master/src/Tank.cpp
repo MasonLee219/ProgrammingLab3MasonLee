@@ -13,9 +13,12 @@ void Tank::update(double dt)
 	
 	double y = m_tankBase.getPosition().y + std::sin(MathUtility::DEG_TO_RAD * m_rotation) * m_speed * (dt / 1000);
 	
-
+	m_tankBase.setRotation(m_rotation);
+	m_turret.setRotation(m_rotation);
 	m_tankBase.setPosition(x, y);
 	m_turret.setPosition(m_tankBase.getPosition());
+	m_speed *= 0.99;
+	std::clamp
 	
 }
 
@@ -49,7 +52,7 @@ void Tank::increaseSpeed()
 {
 	if (m_speed < 100.0)
 	{
-		m_speed += 1;
+		m_speed *= 0.99;
 	}
 }
 
@@ -58,7 +61,7 @@ void Tank::decreaseSpeed()
 {
 	if (m_speed > -100.0)
 	{
-		m_speed -= 1;
+		m_speed *= 0.99;
 	}
 }
 
