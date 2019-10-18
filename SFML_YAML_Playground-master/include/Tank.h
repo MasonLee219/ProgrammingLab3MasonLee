@@ -40,6 +40,11 @@ public:
 	/// </summary>
 	void decreaseRotation();
 
+	/// <summary>
+/// @brief Processes control keys and applies speed/rotation as appropriate.
+/// </summary>
+	void handleKeyInput();
+
 private:
 
 

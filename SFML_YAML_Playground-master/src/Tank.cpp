@@ -20,11 +20,11 @@ void Tank::update(double dt)
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		increaseRotation();
+		decreaseRotation();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		decreaseRotation();
+		increaseRotation();
 	}
 	
 
