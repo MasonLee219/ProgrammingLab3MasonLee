@@ -120,23 +120,7 @@ void Game::processGameEvents(sf::Event& event)
 		}
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-	{
-		m_Tank.increaseSpeed();
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-	{
-		m_Tank.decreaseSpeed();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		m_Tank.increaseRotation();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		m_Tank.decreaseRotation();
-	}
+	
 
 }
 

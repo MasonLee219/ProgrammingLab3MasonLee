@@ -9,6 +9,23 @@ Tank::Tank(sf::Texture const & texture, sf::Vector2f const & pos)
 
 void Tank::update(double dt)
 {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		increaseSpeed();
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+		decreaseSpeed();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		increaseRotation();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		decreaseRotation();
+	}
 	
 
 	double x = m_tankBase.getPosition().x + std::cos(MathUtility::DEG_TO_RAD * m_rotation) * m_speed * (dt / 1000);
@@ -25,7 +42,7 @@ void Tank::update(double dt)
 		m_speed *= 0.99;
 	//}
 
-	m_speed = std::clamp(m_speed, -20.0, 50.0);
+	m_speed = std::clamp(m_speed, -20000.0, 50000.0);
 }
 
 void Tank::render(sf::RenderWindow & window) 
@@ -55,22 +72,14 @@ void Tank::initSprites(sf::Vector2f const & pos)
 
 ////////////////////////////////////////////////////////////
 void Tank::increaseSpeed()
-{
-	if (m_speed < 100.0)
-	{
-		m_speed +=1 ;
-		
-	}
+{	
+		m_speed += 3;	
 }
 
 ////////////////////////////////////////////////////////////
 void Tank::decreaseSpeed()
-{
-	if (m_speed > -100.0)
-	{
-		m_speed -= 1;
-		
-	}
+{	
+		m_speed -= 3;		
 }
 
 ////////////////////////////////////////////////////////////
